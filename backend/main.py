@@ -30,9 +30,13 @@ app = FastAPI(
 # --- "BEHTREEN" (AWESOME) CORS UPDATE ---
 # Hum yahaan apne dono URLs daalenge
 allowed_origins = [
-    "http://localhost:5173",  # Aapka local React app (development ke liye)
+    # --- Yahaan APNA VERCEL URL PASTE KAREIN ---
+    "https" 
+    # Example: "https://jullu-buttu-shop.vercel.app", 
+    # --- Yahaan APNA VERCEL URL PASTE KAREIN ---
+
+    "http://localhost:5173",  # Aapka local React app
     "http://127.0.0.1:5173", # Local development (alternative)
-    "https://jullu-buttu.vercel.app" # Aapka future Vercel URL (example)
 ]
 
 app.add_middleware(
@@ -65,13 +69,11 @@ async def read_root():
 
 # --- Server ko run karne ke liye (Updated for Render) ---
 if __name__ == "__main__":
-    # Render.com environment variable 'PORT' ka istemal karega
-    port = int(os.getenv("PORT", 8000)) # Default 8000
+    port = int(os.getenv("PORT", 8000))
     print(f"Starting Uvicorn server on 0.0.0.0:{port}")
     uvicorn.run(
         "main:app",
-        host="0.0.0.0", # '0.0.0.0' zaroori hai
+        host="0.0.0.0",
         port=port,
-        reload=False # Production mein reload False hota hai
+        reload=False
     )
-
