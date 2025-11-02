@@ -27,17 +27,15 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# --- "BEHTREEN" (AWESOME) CORS UPDATE ---
-# Hum yahaan apne dono URLs daalenge
+# --- "BEHTREEN" (AWESOME) CORS UPDATE (100% FIX) ---
+# Humne placeholder ko aapke asli Vercel URL se badal diya hai
 allowed_origins = [
-    # --- Yahaan APNA VERCEL URL PASTE KAREIN ---
-    "https" 
-    # Example: "https://jullu-buttu-shop.vercel.app", 
-    # --- Yahaan APNA VERCEL URL PASTE KAREIN ---
-
+    "https://jullu-buttu-shop.vercel.app",   # <-- YEH HAI 100% FIX
+    
     "http://localhost:5173",  # Aapka local React app
     "http://127.0.0.1:5173", # Local development (alternative)
 ]
+# --- END OF CORS UPDATE ---
 
 app.add_middleware(
     CORSMiddleware,
@@ -46,7 +44,6 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
-# --- END OF CORS UPDATE ---
 
 # --- Event Handlers (Startup) ---
 @app.on_event("startup")
@@ -77,3 +74,4 @@ if __name__ == "__main__":
         port=port,
         reload=False
     )
+
