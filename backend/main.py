@@ -28,12 +28,20 @@ app = FastAPI(
 )
 
 # --- "BEHTREEN" (AWESOME) CORS UPDATE (100% FIX) ---
-# Humne placeholder ko aapke asli Vercel URL se badal diya hai
+# Hum yahaan apne sabhi "doston" (allowed URLs) ko daalenge
 allowed_origins = [
-    "https://jullu-buttu-shop.vercel.app",   # <-- YEH HAI 100% FIX
+    # 1. Aapka Vercel URL
+    "https://jullu-buttu-shop.vercel.app",
     
-    "http://localhost:5173",  # Aapka local React app
-    "http://127.0.0.1:5173", # Local development (alternative)
+    # 2. Aapka Naya "Behtreen" (Awesome) Domain (HTTPS)
+    "https://jullubuttu.in",
+    
+    # 3. Aapka Naya "Behtreen" (Awesome) Domain (WWW)
+    "https://www.jullubuttu.in",
+
+    # 4. Local development ke liye
+    "http://localhost:5173",  
+    "http://127.0.0.1:5173",
 ]
 # --- END OF CORS UPDATE ---
 
@@ -62,6 +70,9 @@ app.include_router(auth_router)
 # --- Root Endpoint (Health Check) ---
 @app.get("/", tags=["Health Check"])
 async def read_root():
+    """
+    Ek simple 'Health Check' endpoint yeh dekhne ke liye ki server chal raha hai.
+    """
     return {"status": "success", "message": "Welcome to Mobile Cover Shop API!"}
 
 # --- Server ko run karne ke liye (Updated for Render) ---
@@ -74,4 +85,3 @@ if __name__ == "__main__":
         port=port,
         reload=False
     )
-
