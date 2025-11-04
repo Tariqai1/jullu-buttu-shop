@@ -8,11 +8,11 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 // --- "BEHTREEN" (AWESOME) 100% FIX (Redirect Error) ---
-// Humne URL ke aakhir mein "/" (slash) WAAPAS ADD kar diya hai
-// Taaki yeh Python backend (jo 307 Redirect bhej raha hai) se 100% match kare
-const COVERS_API_URL = `${API_URL}/covers/`;
-const CATEGORIES_API_URL = `${API_URL}/categories/`;
-const NOTIFY_API_URL = `${API_URL}/notify/`;
+// Humne URL ke aakhir se "/" (slash) HATA diya hai
+// Taaki yeh Python backend se 100% match kare
+const COVERS_API_URL = `${API_URL}/covers`;
+const CATEGORIES_API_URL = `${API_URL}/categories`;
+const NOTIFY_API_URL = `${API_URL}/notify`;
 // --- END OF FIX ---
 
 // Helper function: Date ko format karne ke liye
@@ -61,7 +61,7 @@ function AdminDashboard({ activeTab }) {
       // Teeno API calls ek saath (parallel) bhejenge
       const [coversRes, categoriesRes, notificationsRes] = await Promise.all([
         // --- "BEHTREEN" (AWESOME) 100% FIX ---
-        // Humne URL (jo ab slash ke saath hai) aur config pass kiya
+        // Humne URL se '?admin_mode=true' hata diya aur 'coversConfig' pass kiya
         axios.get(COVERS_API_URL, coversConfig), 
         axios.get(CATEGORIES_API_URL, config),
         axios.get(NOTIFY_API_URL, config)
